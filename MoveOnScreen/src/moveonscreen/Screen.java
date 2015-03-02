@@ -45,6 +45,11 @@ public class Screen extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -221,11 +226,17 @@ public class Screen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIzqActionPerformed
 
     private void menuBotonesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBotonesMousePressed
-       if(btnArriba.isEnabled()){
+       System.out.println("ESTO :"+btnArriba.isEnabled());
+        
+        if(btnArriba.isEnabled()){
             btnArriba.setEnabled(false);
             btnAbajo.setEnabled(false);
             btnIzq.setEnabled(false);
             btnDer.setEnabled(false);
+            
+            
+            Screen.this.requestFocus(true);
+           
        }else{
           btnArriba.setEnabled(true);
           btnAbajo.setEnabled(true);
@@ -234,6 +245,10 @@ public class Screen extends javax.swing.JFrame {
 
        }
     }//GEN-LAST:event_menuBotonesMousePressed
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        Screen.this.requestFocus(true);
+    }//GEN-LAST:event_formMousePressed
 
     /**
      * @param args the command line arguments
@@ -274,26 +289,11 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JButton btnAbajo;
     private javax.swing.JButton btnArriba;
     private javax.swing.JButton btnDer;
-    private javax.swing.JButton btnDown;
-    private javax.swing.JButton btnDown1;
-    private javax.swing.JButton btnDown2;
     private javax.swing.JButton btnIzq;
-    private javax.swing.JButton btnLeft;
-    private javax.swing.JButton btnLeft1;
-    private javax.swing.JButton btnLeft2;
-    private javax.swing.JButton btnRight;
-    private javax.swing.JButton btnRight1;
-    private javax.swing.JButton btnRight2;
-    private javax.swing.JButton btnUp;
-    private javax.swing.JButton btnUp1;
-    private javax.swing.JButton btnUp2;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblImage;
     private javax.swing.JMenu menuBotones;
-    private javax.swing.JPanel pnlBotones;
-    private javax.swing.JPanel pnlBotones1;
-    private javax.swing.JPanel pnlBotones2;
     // End of variables declaration//GEN-END:variables
 }
