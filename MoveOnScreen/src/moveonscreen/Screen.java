@@ -18,6 +18,9 @@ public class Screen extends javax.swing.JFrame {
      */
     public Screen() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        
     }
 
     /**
@@ -29,7 +32,17 @@ public class Screen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         lblImage = new javax.swing.JLabel();
+        btnArriba = new javax.swing.JButton();
+        btnAbajo = new javax.swing.JButton();
+        btnDer = new javax.swing.JButton();
+        btnIzq = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuBotones = new javax.swing.JMenu();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -40,21 +53,86 @@ public class Screen extends javax.swing.JFrame {
 
         lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/image_mario.jpg"))); // NOI18N
 
+        btnArriba.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/up.png"))); // NOI18N
+        btnArriba.setEnabled(false);
+        btnArriba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArribaActionPerformed(evt);
+            }
+        });
+
+        btnAbajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/down.png"))); // NOI18N
+        btnAbajo.setEnabled(false);
+        btnAbajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbajoActionPerformed(evt);
+            }
+        });
+
+        btnDer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/right.png"))); // NOI18N
+        btnDer.setEnabled(false);
+        btnDer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDerActionPerformed(evt);
+            }
+        });
+
+        btnIzq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/left.png"))); // NOI18N
+        btnIzq.setEnabled(false);
+        btnIzq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzqActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        menuBotones.setText("Botones");
+        menuBotones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuBotonesMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(menuBotones);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(btnIzq)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnArriba)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAbajo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDer)))))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addGap(154, 154, 154)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnIzq)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnArriba)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAbajo))
+                    .addComponent(btnDer))
+                .addContainerGap())
         );
 
         pack();
@@ -65,6 +143,7 @@ public class Screen extends javax.swing.JFrame {
         /*System.out.println("es esto: "+KeyEvent.VK_UP);
         System.out.println("da esto: "+evt.getKeyCode());*/
         
+       
         //MOVER HACIA ARRIBA
         if(KeyEvent.VK_UP == evt.getKeyCode()){
           int x =lblImage.getX();
@@ -113,6 +192,49 @@ public class Screen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formKeyPressed
 
+    private void btnArribaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArribaActionPerformed
+        int x =lblImage.getX();
+          int y =lblImage.getY();
+          
+          lblImage.setLocation(x, y-5);
+    }//GEN-LAST:event_btnArribaActionPerformed
+
+    private void btnAbajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbajoActionPerformed
+        int x =lblImage.getX();
+          int y =lblImage.getY();
+          
+          lblImage.setLocation(x, y+5);
+    }//GEN-LAST:event_btnAbajoActionPerformed
+
+    private void btnDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerActionPerformed
+        int x =lblImage.getX();
+          int y =lblImage.getY();
+          
+          lblImage.setLocation(x+5, y);
+    }//GEN-LAST:event_btnDerActionPerformed
+
+    private void btnIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzqActionPerformed
+        int x =lblImage.getX();
+          int y =lblImage.getY();
+          
+          lblImage.setLocation(x-5, y);
+    }//GEN-LAST:event_btnIzqActionPerformed
+
+    private void menuBotonesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBotonesMousePressed
+       if(btnArriba.isEnabled()){
+            btnArriba.setEnabled(false);
+            btnAbajo.setEnabled(false);
+            btnIzq.setEnabled(false);
+            btnDer.setEnabled(false);
+       }else{
+          btnArriba.setEnabled(true);
+          btnAbajo.setEnabled(true);
+          btnIzq.setEnabled(true);
+          btnDer.setEnabled(true); 
+
+       }
+    }//GEN-LAST:event_menuBotonesMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -149,6 +271,29 @@ public class Screen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbajo;
+    private javax.swing.JButton btnArriba;
+    private javax.swing.JButton btnDer;
+    private javax.swing.JButton btnDown;
+    private javax.swing.JButton btnDown1;
+    private javax.swing.JButton btnDown2;
+    private javax.swing.JButton btnIzq;
+    private javax.swing.JButton btnLeft;
+    private javax.swing.JButton btnLeft1;
+    private javax.swing.JButton btnLeft2;
+    private javax.swing.JButton btnRight;
+    private javax.swing.JButton btnRight1;
+    private javax.swing.JButton btnRight2;
+    private javax.swing.JButton btnUp;
+    private javax.swing.JButton btnUp1;
+    private javax.swing.JButton btnUp2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblImage;
+    private javax.swing.JMenu menuBotones;
+    private javax.swing.JPanel pnlBotones;
+    private javax.swing.JPanel pnlBotones1;
+    private javax.swing.JPanel pnlBotones2;
     // End of variables declaration//GEN-END:variables
 }
