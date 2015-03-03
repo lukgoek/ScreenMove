@@ -6,19 +6,45 @@
 package moveonscreen;
 
 import java.awt.event.KeyEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author HbTO
  */
 public class Screen extends javax.swing.JFrame {
-
+    
+    
+    //Un socket es la combinacion de una dir ip con un puerto.
+    private Socket socket;
+    
+    
+    /*Canales de comunicacion "espacio de memoria entre usuario/servidor.
+      canal entrada, canal salida
+      bits*/
+    private InputStream inputStream;
+    private OutputStream outputStream;
+    
+    //variables primitivas de java
+    private DataInputStream entradaDatos;
+    private DataOutputStream salidaDatos;
+    
+    
     /**
      * Creates new form Screen
      */
     public Screen() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        
         
         
     }
@@ -144,12 +170,67 @@ public class Screen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+     public void conexion(int puerto, String host){
+        /* host=ip puerto=puerto al que se conectara  */
+        try {
+            socket = new Socket(host, puerto);
+            String dato = "setplayer|300|300|goku_image.png";
+            enviaDatos(dato);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    
+    public void recibeDatos(){
+        
+        try {
+            inputStream = socket.getInputStream();
+            entradaDatos = new DataInputStream(inputStream);
+            //System.out.println("RECIBEDATOS INTERFACE"+entradaDatos.readUTF());
+            
+            //agregarMsg(entradaDatos.readUTF());
+        } catch (IOException ex) {
+            Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    
+    
+    public void enviaDatos(String datos){
+        
+        try {
+            outputStream = socket.getOutputStream();
+            salidaDatos = new DataOutputStream(outputStream);
+            
+            salidaDatos.writeUTF(datos);
+            salidaDatos.flush();
+             System.out.println("Se envio esto: "+datos);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    
+    
+    
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         char tecla = evt.getKeyChar();
         /*System.out.println("es esto: "+KeyEvent.VK_UP);
         System.out.println("da esto: "+evt.getKeyCode());*/
+        String comando="move|";
+        String ejecutar;
         
-       
         //MOVER HACIA ARRIBA
         if(KeyEvent.VK_UP == evt.getKeyCode()){
           int x =lblImage.getX();
@@ -158,6 +239,10 @@ public class Screen extends javax.swing.JFrame {
           lblImage.setLocation(x, y-5);
          
           System.out.println("Move to Up");
+          ejecutar="up";
+          enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);
+          
+          
           //lblImage.repaint();
         }
         
@@ -170,6 +255,9 @@ public class Screen extends javax.swing.JFrame {
          
           System.out.println("Move to Down");
           //lblImage.repaint();
+          ejecutar="down";
+          enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);
+          
         }
         
         //MOVER HACIA IZQUIERDA
@@ -181,6 +269,9 @@ public class Screen extends javax.swing.JFrame {
          
           System.out.println("Move to Left");
           //lblImage.repaint();
+          ejecutar="left";
+          enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);
+          
         }
         
         //MOVER HACIA DERECHA
@@ -192,6 +283,9 @@ public class Screen extends javax.swing.JFrame {
          
           System.out.println("Move to Right");
           //lblImage.repaint();
+          ejecutar="right";
+          enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);
+          
         }
         
         
@@ -203,6 +297,12 @@ public class Screen extends javax.swing.JFrame {
           int y =lblImage.getY();
           
           lblImage.setLocation(x, y-5);
+          
+          
+          String comando="move|";
+          String ejecutar;
+          ejecutar="up";
+          enviaDatos(comando+ejecutar);
     }//GEN-LAST:event_btnArribaActionPerformed
 
     private void btnAbajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbajoActionPerformed
@@ -210,6 +310,11 @@ public class Screen extends javax.swing.JFrame {
           int y =lblImage.getY();
           
           lblImage.setLocation(x, y+5);
+          
+          String comando="move|";
+          String ejecutar;
+          ejecutar="down";
+          enviaDatos(comando+ejecutar);
     }//GEN-LAST:event_btnAbajoActionPerformed
 
     private void btnDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerActionPerformed
@@ -217,6 +322,11 @@ public class Screen extends javax.swing.JFrame {
           int y =lblImage.getY();
           
           lblImage.setLocation(x+5, y);
+          
+          String comando="move|";
+          String ejecutar;
+          ejecutar="right";
+          enviaDatos(comando+ejecutar);
     }//GEN-LAST:event_btnDerActionPerformed
 
     private void btnIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzqActionPerformed
@@ -224,6 +334,11 @@ public class Screen extends javax.swing.JFrame {
           int y =lblImage.getY();
           
           lblImage.setLocation(x-5, y);
+          
+          String comando="move|";
+          String ejecutar;
+          ejecutar="left";
+          enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);enviaDatos(comando+ejecutar);
     }//GEN-LAST:event_btnIzqActionPerformed
 
     private void menuBotonesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBotonesMousePressed

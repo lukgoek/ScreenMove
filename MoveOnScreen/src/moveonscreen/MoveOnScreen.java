@@ -17,5 +17,6 @@ public class MoveOnScreen {
     public static void main(String[] args) {
        Screen obj = new Screen();
        obj.setVisible(true);
+       obj.conexion(7777, "192.10.11.47");
     }
 }
